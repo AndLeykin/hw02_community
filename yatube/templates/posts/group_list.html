@@ -1,32 +1,18 @@
 {% extends 'base.html' %}
 {% block title %} Записи сообщества {{ group }} {% endblock %}
 {% block content %}
-  <!-- класс py-5 создает отступы сверху и снизу блока -->
   <div class="container py-5">
     <h1>{{ group }}</h1>
     <p>
       {{ group.description }}
     </p>
-  </div>
-  {% for post in posts %}
-    <div class="container py-5">
-      <article>
-        <ul>
-          <li>
-            Автор: {{ post.author.get_full_name }}
-          </li>
-          <li>
-            дата публикации: {{ post.pub_date|date:"d E Y" }}
-          </li>
-        </ul>      
-        <p>
-          {{ post.text }}
-        </p>         
-      </article>
+
+    {% for post in posts %}
+      {% include 'includes/post_card.html' with link_flag=False %}
       <!-- под последним постом нет линии -->
       {% if not forloop.last %}
         <hr>
       {% endif %}
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 {% endblock %}

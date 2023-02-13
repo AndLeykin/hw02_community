@@ -1,34 +1,14 @@
 {% extends 'base.html' %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %}Последние обновления на сайте{% endblock %}
 {% block content %}
-  <center>
+  <div class="container">
     <h1> Последние обновления на сайте</h1>
-  </center>
-  {% for post in posts %}
-    <!-- класс py-5 создает отступы сверху и снизу блока -->
-    <div class="container py-5">     
-      <article>
-        <ul>
-          <li>
-            Автор: {{ post.author.get_full_name }}
-          </li>
-          <li>
-            дата публикации: {{ post.pub_date|date:"d E Y" }}
-          </li>
-        </ul>      
-        <p>
-          {{ post.text }}
-        </p>
-        {% if post.group %}
-          <a
-            href="{% url 'posts:group_list' post.group.slug %}"
-          >все записи группы "{{ post.group }}"</a>
-        {% endif %}
-      </article>
+    {% for post in posts %}  
+      {% include 'includes/post_card.html' with link_flag=True %}
       <!-- под последним постом нет линии -->
       {% if not forloop.last %}
         <hr>
       {% endif %}
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 {% endblock %}  
