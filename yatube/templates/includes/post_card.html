@@ -16,7 +16,7 @@
       >все записи группы "{{ post.group }}"
     </a>
   {% endif %}
-  {% if not forloop.last %}
-    <hr>
-  {% endif %}
 </article>
+{% if not forloop.last %}
+  <hr>
+{% endif %}
