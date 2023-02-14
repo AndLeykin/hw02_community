@@ -4,11 +4,7 @@
   <div class="container">
     <h1> Последние обновления на сайте</h1>
     {% for post in posts %}  
-      {% include 'includes/post_card.html' with link_flag=True %}
-      <!-- под последним постом нет линии -->
-      {% if not forloop.last %}
-        <hr>
-      {% endif %}
+      {% include 'includes/post_card.html' with group_list_link_flag=True %}
     {% endfor %}
   </div>
-{% endblock %}  
+{% endblock %}

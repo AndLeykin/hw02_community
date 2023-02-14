@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+DISPLAYED_CHARACTERS: int = 50
 
 User = get_user_model()
 
@@ -11,12 +12,12 @@ class Group(models.Model):
     description = models.TextField(default='',
                                    verbose_name='описание сообщества')
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = 'сообщество'
         verbose_name_plural = 'cообщества'
+
+    def __str__(self):
+        return self.title
 
 
 class Post(models.Model):
@@ -38,14 +39,14 @@ class Post(models.Model):
         verbose_name='сообщество'
     )
 
-    def __str__(self):
-        post_description = (f'публикация пользователя {self.author} от '
-                            f'{self.pub_date.strftime("%d.%m.%Y, %H:%M:%S")}: '
-                            f'{self.text[:50]}...'
-                            )
-        return post_description
-
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'публикации'
         ordering = ['-pub_date']
+
+    def __str__(self):
+        post_description = (f'публикация пользователя {self.author} от '
+                            f'{self.pub_date.strftime("%d.%m.%Y, %H:%M:%S")}: '
+                            f'{self.text[:DISPLAYED_CHARACTERS]}...'
+                            )
+        return post_description

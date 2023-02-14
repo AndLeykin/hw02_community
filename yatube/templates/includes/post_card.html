@@ -10,10 +10,13 @@
   <p>
     {{ post.text }}
   </p>
-  {% if post.group and link_flag %}
+  {% if post.group and group_list_link_flag %}
     <a
       href="{% url 'posts:group_list' post.group.slug %}"
       >все записи группы "{{ post.group }}"
     </a>
+  {% endif %}
+  {% if not forloop.last %}
+    <hr>
   {% endif %}
 </article>
